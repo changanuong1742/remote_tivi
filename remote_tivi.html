@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+
+</head>
+<body>
+
+<h2>Điều Khiển</h2>
+<button onclick="dieuKhienSony.turnOff()">Tắt TIVI</button>
+<button onclick="dieuKhienSony.turnOn()">Bật TIVI</button>
+<button onclick="dieuKhienSony.luiKenh()">Lùi Kênh</button>
+<button onclick="dieuKhienSony.nextKenh()">Next Kênh</button>
+<button onclick="dieuKhienSony.tangAmLuong()">Tăng Âm Lượng</button>
+<button onclick="dieuKhienSony.giamAmLuong()">Tăng Âm Lượng</button>
+<hr>
+
+<h2> TIVI</h2>
+
+<button onclick="tiviSony.checkKenhDangPhat()">Xem Kênh Đang Phát</button>
+<button onclick="tiviSony.checkStatusAmLuong()">Xem Âm Lượng TIVI hiện Tại</button>
+
+<BR><BR>
+
+<button onclick="tiviSony.checkStatusTivi()">Xem Trạng Thái TIVI</button>
+
+<hr>
+<p id="show"></p>
+
+
+
+<script>
+
+    function Remote(maTivi, status, amluong, kenh) {
+        this.maTivi = maTivi;
+        this.status = status;
+        this.kenh = kenh;
+        this.amluong = amluong;
+        this.turnOn = function () {
+            this.status = true;
+        };
+        this.turnOff = function () {
+            this.status = false;
+        };
+        this.luiKenh = function () {
+            this.kenh--;
+        };
+        this.nextKenh = function () {
+            this.kenh++;
+        };
+        this.tangAmLuong = function () {
+            this.amluong++;
+        };
+        this.giamAmLuong = function () {
+            this.amluong--;
+        };
+    }
+
+    var dieuKhienSony = new Remote("Sony", false, 50, 6);
+
+
+    function Tivi(kenhDangPhat, status , statusAmLuong) {
+        this.kenhDangPhat = kenhDangPhat;
+        this.status = status;
+        this.statusAmLuong = statusAmLuong;
+        this.checkStatusTivi = function () {
+            if(dieuKhienSony.status){
+                document.getElementById("show").innerHTML = " Tivi Đang Bật " + " Âm Lượng Hiện Tại: " + dieuKhienSony.amluong + " Kênh Đang Phát: " + dieuKhienSony.kenh;
+            } else {
+                document.getElementById("show").innerHTML = "Tivi Đang tắt";
+            }
+        };
+        this.checkStatusAmLuong = function () {
+                document.getElementById("show").innerHTML = "Âm Lượng Hiện Tại: " + dieuKhienSony.amluong;
+
+        };
+        this.checkKenhDangPhat = function () {
+            document.getElementById("show").innerHTML = "Kênh Đang Phát: " + dieuKhienSony.kenh;
+        }
+    }
+
+    var tiviSony = new Tivi();
+
+
+</script>
+</body>
+</html>
